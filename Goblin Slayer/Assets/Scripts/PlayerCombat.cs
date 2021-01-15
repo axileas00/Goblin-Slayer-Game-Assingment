@@ -8,7 +8,20 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 0.5f;
     public Animator animator;
     public LayerMask EnemyLayers;
-    // Update is called once per frame
+    public CharacterController2D playerMovementRef;
+    
+
+    void start()
+    {
+        StartCoroutine("DisableScript");
+    }
+
+    IEnumerator DisableScript()
+    {
+        playerMovementRef.enabled = false;
+        yield return new WaitForSeconds(3f);
+        playerMovementRef.enabled = true;
+    }
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
