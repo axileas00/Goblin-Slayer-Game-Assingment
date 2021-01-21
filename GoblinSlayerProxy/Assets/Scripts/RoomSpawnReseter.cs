@@ -18,6 +18,9 @@ public class RoomSpawnReseter : MonoBehaviour
             // set parent
             parent = collision.gameObject.transform.parent.gameObject;
 
+            //Add rooms to a list so you can delete them later
+            GlobalConstables.Rooms.Enqueue(parent);
+
             // enemy spawn 
             collision.gameObject.GetComponent<EnemySpawn>().enable = true;
 
@@ -78,6 +81,18 @@ public class RoomSpawnReseter : MonoBehaviour
             //set parent
             parent = collision.gameObject.transform.parent.gameObject;
 
+            //destroy rooms
+            if(GlobalConstables.Rooms.Count >= 6)
+            {
+                GameObject room;
+                for(int i = 0; i < 3; i++)
+                {
+                    room = GlobalConstables.Rooms.Peek();
+                    GlobalConstables.Rooms.Dequeue();
+                    Destroy(room);
+                }
+            }
+
             for (int i = 0; i < parent.transform.childCount - 1; i++)
             {
                 if (parent.transform.GetChild(i).name.Equals("FrontDoor")) //sets the animation booleans
@@ -86,6 +101,8 @@ public class RoomSpawnReseter : MonoBehaviour
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("Spawned", true);
                 }
             }
+
+            GlobalConstables.Highscore += 1;
 
             Destroy(collision.gameObject);
         }
