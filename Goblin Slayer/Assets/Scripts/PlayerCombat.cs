@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
+    public int maxHealth = 100;
+    public int currentHealth;
+    public HealthBar healthBar;
+
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public Animator animator;
@@ -11,8 +15,33 @@ public class PlayerCombat : MonoBehaviour
     public CharacterController2D playerMovementRef;
     
 
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            TakeDamage(20);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack();
+        }
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
+    }
     void start()
     {
+        currentHealth = maxHealth;
         StartCoroutine("DisableScript");
     }
 
@@ -21,13 +50,6 @@ public class PlayerCombat : MonoBehaviour
         playerMovementRef.enabled = false;
         yield return new WaitForSeconds(3f);
         playerMovementRef.enabled = true;
-    }
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Attack();
-        }
     }
     void Attack()
     {
