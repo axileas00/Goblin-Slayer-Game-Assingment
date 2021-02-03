@@ -12,41 +12,34 @@ public class RoomSpawnReseter : MonoBehaviour
     {
         if (collision.gameObject.name.Equals("AreaTrigger"))
         {
-            //se he wont be able to go back before the door closes behond him
-            GetComponent<move>().able = false;
+            GetComponent<move>().able = false;//so he wont be able to go back before the door closes behond him
 
-            // set parent
-            parent = collision.gameObject.transform.parent.gameObject;
+            parent = collision.gameObject.transform.parent.gameObject;// set parent
 
-            //Add rooms to a list so you can delete them later
-            GlobalConstables.Rooms.Enqueue(parent);
+            GlobalConstables.Rooms.Enqueue(parent);//Add rooms to a list so you can delete them later
 
-            // enemy spawn 
-            collision.gameObject.GetComponent<EnemySpawn>().enable = true;
+            collision.gameObject.GetComponent<EnemySpawn>().enable = true;// enemy spawn 
 
-            // next room spawn and animation happening
-            spawner = null;
-            
-            for(int i = 0; i < parent.transform.childCount - 1; i++)
+            spawner = null;// next room spawn and animation happening
+
+            for (int i = 0; i < parent.transform.childCount - 1; i++)
             {
-                if (parent.transform.GetChild(i).name.Equals("NextRoomSpawner"))// Checks if the current room has a NextRoomSpawner gameobject
+                if (parent.transform.GetChild(i).name.Equals("NextRoomSpawner"))
                 {
                     spawner = parent.transform.GetChild(i).gameObject;
                     Debug.Log("spawner " + spawner);
-                }
-                else if(parent.transform.GetChild(i).name.Equals("BackDoor") || parent.transform.GetChild(i).name.Equals("FrontDoor"))// resets the animation booleans
+                }// Checks if the current room has a NextRoomSpawner gameobject
+                else if(parent.transform.GetChild(i).name.Equals("BackDoor") || parent.transform.GetChild(i).name.Equals("FrontDoor"))
                 {
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("SpawnedAndDestroyied", false);
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("Spawned", true);
-                }
+                }// resets the animation booleans
             }
-            Debug.Log("parent " + parent);
             
-            if (spawner != null && spawner.transform.parent.gameObject == parent)//if the nextroomspawner gameobject exists and has same parent as the room the next trhee rooms are being spawned
+            if (spawner != null && spawner.transform.parent.gameObject == parent)
             {
                 GlobalConstables.spawnedRooms = 0;
-            }
-            Debug.Log(GlobalConstables.spawnedRooms);
+            }//if the nextroomspawner gameobject exists and has same parent as the room the next three rooms are being spawned
 
             await Task.Delay(waitTime);
             GetComponent<move>().able = true;
@@ -57,20 +50,18 @@ public class RoomSpawnReseter : MonoBehaviour
     {
         if (collision.gameObject.name.Equals("AreaTrigger"))
         {
-            // enemy spawn 
-            collision.gameObject.GetComponent<EnemySpawn>().enable = false;
+            collision.gameObject.GetComponent<EnemySpawn>().enable = false;// enemy spawn 
 
-            //set parent
-            parent = collision.gameObject.transform.parent.gameObject;
+            parent = collision.gameObject.transform.parent.gameObject;//set parent
 
             for (int i = 0; i < parent.transform.childCount - 1; i++)
             {
-                if (parent.transform.GetChild(i).name.Equals("BackDoor") && GlobalConstables.enemies.Count == 0 && GlobalConstables.totalEnemies == 0)//sets the animation booleans
+                if (parent.transform.GetChild(i).name.Equals("BackDoor") && GlobalConstables.enemies.Count == 0 && GlobalConstables.totalEnemies == 0)
                 {
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("SpawnedAndDestroyied", true);
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("Spawned", false);
                 }
-            }
+            }//sets the animation booleans
         }
     }
 
@@ -78,11 +69,9 @@ public class RoomSpawnReseter : MonoBehaviour
     {
         if (collision.gameObject.name.Equals("AreaTrigger"))
         {
-            //set parent
-            parent = collision.gameObject.transform.parent.gameObject;
+            parent = collision.gameObject.transform.parent.gameObject;//set parent
 
-            //destroy rooms
-            if(GlobalConstables.Rooms.Count >= 6)
+            if (GlobalConstables.Rooms.Count >= 6)
             {
                 GameObject room;
                 for(int i = 0; i < 3; i++)
@@ -91,16 +80,16 @@ public class RoomSpawnReseter : MonoBehaviour
                     GlobalConstables.Rooms.Dequeue();
                     Destroy(room);
                 }
-            }
+            }//destroy rooms
 
             for (int i = 0; i < parent.transform.childCount - 1; i++)
             {
-                if (parent.transform.GetChild(i).name.Equals("FrontDoor")) //sets the animation booleans
+                if (parent.transform.GetChild(i).name.Equals("FrontDoor")) 
                 {
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("SpawnedAndDestroyied", false);
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("Spawned", true);
                 }
-            }
+            }//sets the animation booleans
 
             GlobalConstables.Highscore += 1;
 
