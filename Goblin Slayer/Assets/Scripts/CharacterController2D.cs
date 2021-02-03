@@ -26,6 +26,7 @@ public class CharacterController2D : MonoBehaviour
     }
     private void Update()
     {
+        //GroundChecks - JumpForce
         #region GroundChecks-JumpForce
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkradius, whatIsGround);
         
@@ -52,7 +53,7 @@ public class CharacterController2D : MonoBehaviour
         {
             isJumping = false;
         }
-        #endregion
+        #endregion  
     }
 
     private void FixedUpdate()

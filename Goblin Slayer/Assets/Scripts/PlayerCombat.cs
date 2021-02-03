@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Threading.Tasks;
 public class PlayerCombat : MonoBehaviour
 {
     public int maxHealth = 100;
+    public float attackRange = 0.5f;
     public int currentHealth;
-    public HealthBar healthBar;
+    public float attackRate = 2f;
+    private float nextAttackTime = 0f;
 
     public Transform attackPoint;
-    public float attackRange = 0.5f;
     public Animator animator;
-    public LayerMask EnemyLayers;
+    public HealthBar healthBar;
     public CharacterController2D playerMovementRef;
+    public LayerMask EnemyLayers;
+    public 
+
     
 
     void Start()
@@ -20,16 +24,40 @@ public class PlayerCombat : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
-    void Update()
+    async void Update()
     {
+        //Player attackRate restriction
+        if(Time.time >= nextAttackTime)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Attack();
+                
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+            if (Input.GetMouseButton(0))
+            {
+                GetComponent<CharacterController2D>().enabled = false;
+            }
+            else
+            {
+                GetComponent<CharacterController2D>().enabled = true;
+            }
+        }
+
+        //inflict damage on the healthbar
         if (Input.GetKeyDown(KeyCode.E))
         {
             TakeDamage(20);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if(currentHealth < 1)
         {
-            Attack();
+            animator.SetBool("IsDead", true);
+            //await Task.Delay(3000);
+           // GetComponent<CharacterController2D>().enabled = false;
+            //GetComponent<PlayerCombat>().enabled = false;
+            
         }
     }
 
@@ -38,18 +66,6 @@ public class PlayerCombat : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
-    }
-    void start()
-    {
-        currentHealth = maxHealth;
-        StartCoroutine("DisableScript");
-    }
-
-    IEnumerator DisableScript()
-    {
-        playerMovementRef.enabled = false;
-        yield return new WaitForSeconds(3f);
-        playerMovementRef.enabled = true;
     }
     void Attack()
     {

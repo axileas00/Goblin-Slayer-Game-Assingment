@@ -78426,15 +78426,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
-  healthBar: {fileID: 667968299}
-  attackPoint: {fileID: 1489358284}
   attackRange: 0.55
+  currentHealth: 0
+  attackRate: 2
+  attackPoint: {fileID: 1489358284}
   animator: {fileID: 1772467102}
+  healthBar: {fileID: 667968299}
+  playerMovementRef: {fileID: 0}
   EnemyLayers:
     serializedVersion: 2
     m_Bits: 1024
-  playerMovementRef: {fileID: 0}
 --- !u!95 &1772467102
 Animator:
   serializedVersion: 3
