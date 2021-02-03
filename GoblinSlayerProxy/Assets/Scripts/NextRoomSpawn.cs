@@ -22,5 +22,5 @@ public class NextRoomSpawn : MonoBehaviour
         Instantiate(nextRoom[roomNmb], transform.position, Quaternion.identity);
         GlobalConstables.spawnedRooms += 1;
         Destroy(this.gameObject);
-    }
+    }//A method that spawns new rooms
 }
