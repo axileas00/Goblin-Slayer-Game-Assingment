@@ -24,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
-    async void Update()
+    /*async*/ void Update()
     {
         //Player attackRate restriction
         if(Time.time >= nextAttackTime)

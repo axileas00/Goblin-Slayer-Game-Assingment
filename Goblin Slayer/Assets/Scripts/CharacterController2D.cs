@@ -69,10 +69,9 @@ public class CharacterController2D : MonoBehaviour
         {
             animator.SetBool("IsRunning", true);
             if (Input.GetKey(KeyCode.A))
-            {              
+            {
                 // flip the sprite
                 mySpriteRenderer.flipX = false;
-
             }
             else //(Input.GetKey(KeyCode.D))
             {               
