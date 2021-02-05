@@ -692,13 +692,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ce4b5425203f84b875d925a448f52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPoint: {fileID: 1354902960}
+  maxHealth: 100
   attackRange: 0.55
+  currentHealth: 0
+  attackRate: 2
+  attackPoint: {fileID: 1354902960}
   animator: {fileID: 1702381900}
+  healthBar: {fileID: 0}
+  playerMovementRef: {fileID: 0}
   EnemyLayers:
     serializedVersion: 2
     m_Bits: 1024
-  playerMovementRef: {fileID: 0}
 --- !u!1 &1999503286
 GameObject:
   m_ObjectHideFlags: 0
