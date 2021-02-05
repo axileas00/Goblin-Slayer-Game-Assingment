@@ -11,13 +11,13 @@ public class Highscoreviwer : MonoBehaviour
 
     private void Start()
     {
-        score = GlobalConstables.Highscore;
+        score = GlobalConstables.GetGlobalConstables().GetHighscore();
     }
     void Update()
     {
-        if(score != GlobalConstables.Highscore)
+        if(score != GlobalConstables.GetGlobalConstables().GetHighscore())
         {
-            score = GlobalConstables.Highscore;
+            score = GlobalConstables.GetGlobalConstables().GetHighscore();
             highScoreText.text = "Highscore: " + score.ToString(); 
         }
     }

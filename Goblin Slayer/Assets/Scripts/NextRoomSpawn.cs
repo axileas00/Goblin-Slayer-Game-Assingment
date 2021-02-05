@@ -10,7 +10,7 @@ public class NextRoomSpawn : MonoBehaviour
 
     void Update()
     {
-        if (GlobalConstables.spawnedRooms < 3)
+        if (GlobalConstables.GetGlobalConstables().GetSpawnedRooms() < 3)
         {
             Picker();
         }
@@ -20,7 +20,7 @@ public class NextRoomSpawn : MonoBehaviour
     {
         int roomNmb = Random.Range(0, nextRoom.Length);
         Instantiate(nextRoom[roomNmb], transform.position, Quaternion.identity);
-        GlobalConstables.spawnedRooms += 1;
+        GlobalConstables.GetGlobalConstables().IncreaseSpawnedRoomsBy(1);
         Destroy(this.gameObject);
     }//A method that spawns new rooms
 }

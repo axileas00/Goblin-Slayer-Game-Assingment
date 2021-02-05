@@ -13,7 +13,7 @@ public class RoomSpawnReseter : MonoBehaviour
         {
             parent = collision.gameObject.transform.parent.gameObject;// set parent
 
-            GlobalConstables.Rooms.Enqueue(parent);//Add rooms to a list so you can delete them later
+            GlobalConstables.GetGlobalConstables().GetRooms().Enqueue(parent);//Add rooms to a list so you can delete them later
 
             collision.gameObject.GetComponent<EnemySpawn>().enable = true;// enemy spawn 
 
@@ -35,7 +35,7 @@ public class RoomSpawnReseter : MonoBehaviour
             
             if (spawner != null && spawner.transform.parent.gameObject == parent)
             {
-                GlobalConstables.spawnedRooms = 0;
+                GlobalConstables.GetGlobalConstables().SetSpawnedRoomsTo(0);
             }//if the nextroomspawner gameobject exists and has same parent as the room the next three rooms are being spawned
         }
     }
@@ -50,7 +50,7 @@ public class RoomSpawnReseter : MonoBehaviour
 
             for (int i = 0; i < parent.transform.childCount - 1; i++)
             {
-                if (parent.transform.GetChild(i).name.Equals("BackDoor") && GlobalConstables.enemies.Count == 0 && GlobalConstables.totalEnemies == 0)
+                if (parent.transform.GetChild(i).name.Equals("BackDoor") && GlobalConstables.GetGlobalConstables().GetEnemies().Count == 0 && GlobalConstables.GetGlobalConstables().GetTotalEnemies() <= 0)
                 {
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("SpawnedAndDestroyied", true);
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("Spawned", false);
@@ -65,13 +65,13 @@ public class RoomSpawnReseter : MonoBehaviour
         {
             parent = collision.gameObject.transform.parent.gameObject;//set parent
 
-            if (GlobalConstables.Rooms.Count >= 6)
+            if (GlobalConstables.GetGlobalConstables().GetRooms().Count >= 6)
             {
                 GameObject room;
                 for(int i = 0; i < 3; i++)
                 {
-                    room = GlobalConstables.Rooms.Peek();
-                    GlobalConstables.Rooms.Dequeue();
+                    room = GlobalConstables.GetGlobalConstables().GetRooms().Peek();
+                    GlobalConstables.GetGlobalConstables().GetRooms().Dequeue();
                     Destroy(room);
                 }
             }//destroy rooms
@@ -85,7 +85,7 @@ public class RoomSpawnReseter : MonoBehaviour
                 }
             }//sets the animation booleans
 
-            GlobalConstables.Highscore += 1;
+            GlobalConstables.GetGlobalConstables().IncreaseHighscoreBy(1);
 
             Destroy(collision.gameObject);
         }

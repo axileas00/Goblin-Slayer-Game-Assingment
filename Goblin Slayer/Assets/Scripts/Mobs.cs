@@ -17,9 +17,8 @@ public class Mobs : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GlobalConstables.enemies.Remove(this.gameObject);
-            GlobalConstables.totalEnemies -= 1;
-            
+            GlobalConstables.GetGlobalConstables().GetEnemies().Remove(this.gameObject);
+            GlobalConstables.GetGlobalConstables().DecreaseTotalEnemiesBy(1);
             Destroy(this.gameObject);
         }
     }//change this
@@ -43,5 +42,4 @@ public class Mobs : MonoBehaviour
     {
         Goto();
     }
-
 }
