@@ -6,7 +6,6 @@ public class RoomSpawnReseter : MonoBehaviour
 {
     [SerializeField] GameObject parent, spawner;
 
-    int waitTime = 500;// the wait time for the async
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name.Equals("AreaTrigger"))
