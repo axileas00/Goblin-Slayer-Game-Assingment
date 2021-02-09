@@ -30,7 +30,7 @@ public class EnemySpawn : MonoBehaviour
                 x = Random.Range(0, SpawnPoints.Length);
                 enemyToAdd = Instantiate(enemy, SpawnPoints[x].transform.position, Quaternion.identity);
                 GlobalConstables.GetGlobalConstables().GetEnemies().Add(enemyToAdd);
-                await Task.Delay(500);
+                await Task.Delay(1000);
             }// spawn mechanism
         }//bool to enable spawners
     }
