@@ -17,7 +17,7 @@ public class CameraFollows : MonoBehaviour
         this.GetCameraFollowPositionFunc = GetCameraFollowPositionFunc;
     }
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         //test for low fps
         //Application.targetFrameRate = 5;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,8 @@ public class Mobs : MonoBehaviour
 {
     [SerializeField] int c = 1;
     [SerializeField] GameObject target;
+    [SerializeField] bool move = true;
+    [SerializeField] float hp = 100;
 
     private void Start()
     {
@@ -17,31 +20,63 @@ public class Mobs : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GlobalConstables.GetGlobalConstables().GetEnemies().Remove(this.gameObject);
-            GlobalConstables.GetGlobalConstables().DecreaseTotalEnemiesBy(1);
-            Destroy(this.gameObject);
+            move = false;
+            GetComponent<Animator>().SetBool("isAttacking", true);
+            //GlobalConstables.GetGlobalConstables().GetEnemies().Remove(this.gameObject);
+            //GlobalConstables.GetGlobalConstables().DecreaseTotalEnemiesBy(1);
+            //GetComponent<BoxCollider2D>().enabled = false;
+            //Destroy(this.gameObject);
         }
-    }//change this
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            move = true;
+            GetComponent<Animator>().SetBool("isAttacking", false);
+        }
+    }
 
     void Goto()
     {
-        if((transform.position - target.transform.position) != Vector3.zero)
+        if (move)
         {
-            if(transform.position.x < target.transform.position.x)
+            if ((transform.position - target.transform.position) != Vector3.zero)
             {
-                transform.position += Vector3.right * c * Time.deltaTime;
-                GetComponent<SpriteRenderer>().flipX = false;
-            }//right movement
-            else if(transform.position.x > target.transform.position.x)
-            {
-                transform.position += Vector3.left * c * Time.deltaTime;
-               GetComponent<SpriteRenderer>().flipX = true;
-            }//left movement
+                if (transform.position.x < target.transform.position.x)
+                {
+                    transform.position += Vector3.right * c * Time.deltaTime;
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }//right movement
+                else if (transform.position.x > target.transform.position.x)
+                {
+                    transform.position += Vector3.left * c * Time.deltaTime;
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }//left movement
+            }
         }
     }// method so the enemies can track the player and follow him
 
-    private void Update()
+    void Attacking()
+    {
+        Debug.Log(target.name);
+    }
+
+    private async void Update()
     {
         Goto();
+
+
+        if (hp <= 1)
+        {
+            move = false;
+            GetComponent<Animator>().SetBool("isDead", true);
+            GlobalConstables.GetGlobalConstables().GetEnemies().Remove(this.gameObject);
+            GlobalConstables.GetGlobalConstables().DecreaseTotalEnemiesBy(1);
+            GetComponent<BoxCollider2D>().enabled = false;
+            await Task.Delay(2200);
+            Destroy(this.gameObject);
+        }
     }
 }

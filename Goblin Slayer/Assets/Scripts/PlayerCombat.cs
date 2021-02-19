@@ -15,9 +15,6 @@ public class PlayerCombat : MonoBehaviour
     public HealthBar healthBar;
     public CharacterController2D playerMovementRef;
     public LayerMask EnemyLayers;
-    public 
-
-    
 
     void Start()
     {
@@ -61,6 +58,11 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    void DoDmg()
+    {
+
+    }
+
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -79,6 +81,7 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("we hit " + enemy.name);
+            //enemy.GetComponent<>
         }
 
     }

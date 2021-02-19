@@ -18,7 +18,7 @@ public class CharacterController2D : MonoBehaviour
     public float jumpTime;
     public bool isJumping;
     private float moveInput;
-        public float speed;
+    public float speed;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -78,7 +78,9 @@ public class CharacterController2D : MonoBehaviour
                 // flip the sprite
                 mySpriteRenderer.flipX = true;
 
-            }            
+            }         
+            
+
         }
         else
         {
