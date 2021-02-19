@@ -16,6 +16,7 @@ public class PlayerCombat : MonoBehaviour
     public CharacterController2D playerMovementRef;
     public LayerMask EnemyLayers;
 
+    [SerializeField] GameObject[] enemy;
     void Start()
     {
         currentHealth = maxHealth;
@@ -60,7 +61,24 @@ public class PlayerCombat : MonoBehaviour
 
     void DoDmg()
     {
-
+        if(GlobalConstables.GetGlobalConstables().GetEnemies().Count > 0)
+        {
+            foreach (GameObject t in GlobalConstables.GetGlobalConstables().GetEnemies())
+            {
+                if (Vector2.Distance(t.transform.position, transform.position) < 1)
+                {
+                    t.GetComponent<Mobs>().tookHit = true;
+                }
+                else
+                {
+                    Debug.Log("Empty strike");
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Empty strike");
+        }
     }
 
     void TakeDamage(int damage)
@@ -83,8 +101,7 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("we hit " + enemy.name);
             //enemy.GetComponent<>
         }
-
-    }
+    }//enables animator
 
     private void OnDrawGizmosSelected()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject[] enemy;
 
     [SerializeField] private GameObject[] SpawnPoints;
 
@@ -28,7 +28,7 @@ public class EnemySpawn : MonoBehaviour
             for (int i = 0; i <= NumberOfEnemies; i++)
             {
                 x = Random.Range(0, SpawnPoints.Length);
-                enemyToAdd = Instantiate(enemy, SpawnPoints[x].transform.position, Quaternion.identity);
+                enemyToAdd = Instantiate(enemy[x], SpawnPoints[x].transform.position, Quaternion.identity);
                 GlobalConstables.GetGlobalConstables().GetEnemies().Add(enemyToAdd);
                 await Task.Delay(1000);
             }// spawn mechanism

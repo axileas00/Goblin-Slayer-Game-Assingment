@@ -9,6 +9,7 @@ public class Mobs : MonoBehaviour
     [SerializeField] int c = 1;
     [SerializeField] GameObject target;
     [SerializeField] bool move = true;
+    public bool tookHit = false;
     [SerializeField] float hp = 100;
 
     private void Start()
@@ -36,6 +37,11 @@ public class Mobs : MonoBehaviour
             move = true;
             GetComponent<Animator>().SetBool("isAttacking", false);
         }
+    }
+
+    public void SetTookHitToTrue()
+    {
+        tookHit = true; 
     }
 
     void Goto()
@@ -67,6 +73,12 @@ public class Mobs : MonoBehaviour
     {
         Goto();
 
+
+        if (tookHit)
+        {
+            hp -= 25;
+            tookHit = false;
+        }
 
         if (hp <= 1)
         {
