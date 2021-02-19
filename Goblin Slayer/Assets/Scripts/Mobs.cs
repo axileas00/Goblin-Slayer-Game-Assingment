@@ -29,11 +29,13 @@ public class Mobs : MonoBehaviour
         {
             if(transform.position.x < target.transform.position.x)
             {
-                transform.position += Vector3.right * c * Time.deltaTime; 
+                transform.position += Vector3.right * c * Time.deltaTime;
+                GetComponent<SpriteRenderer>().flipX = false;
             }//right movement
             else if(transform.position.x > target.transform.position.x)
             {
-                transform.position += Vector3.left * c * Time.deltaTime; 
+                transform.position += Vector3.left * c * Time.deltaTime;
+               GetComponent<SpriteRenderer>().flipX = true;
             }//left movement
         }
     }// method so the enemies can track the player and follow him
