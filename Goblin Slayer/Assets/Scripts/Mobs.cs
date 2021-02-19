@@ -67,6 +67,7 @@ public class Mobs : MonoBehaviour
     void Attacking()
     {
         Debug.Log(target.name);
+        if (Vector2.Distance(transform.position, target.transform.position) < 2) { target.GetComponent<PlayerCombat>().tookDmg = true; }
     }
 
     private async void Update()

@@ -18,8 +18,9 @@ public class RoomSpawnReseter : MonoBehaviour
 
             spawner = null;// next room spawn and animation happening
 
-            for (int i = 0; i < parent.transform.childCount - 1; i++)
+            for (int i = 0; i < parent.transform.childCount; i++)
             {
+                Debug.Log(parent.transform.GetChild(i).name);
                 if (parent.transform.GetChild(i).name.Equals("NextRoomSpawner"))
                 {
                     spawner = parent.transform.GetChild(i).gameObject;

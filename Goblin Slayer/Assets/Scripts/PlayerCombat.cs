@@ -6,23 +6,21 @@ public class PlayerCombat : MonoBehaviour
 {
     public int maxHealth = 100;
     public float attackRange = 0.5f;
-    public int currentHealth;
+    public int currentHealth = 100;
     public float attackRate = 2f;
     private float nextAttackTime = 0f;
-
+    public bool tookDmg = false;
     public Transform attackPoint;
     public Animator animator;
     public HealthBar healthBar;
     public CharacterController2D playerMovementRef;
     public LayerMask EnemyLayers;
-
-    [SerializeField] GameObject[] enemy;
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
-    /*async*/ void Update()
+    async void Update()
     {
         //Player attackRate restriction
         if(Time.time >= nextAttackTime)
@@ -44,18 +42,20 @@ public class PlayerCombat : MonoBehaviour
         }
 
         //inflict damage on the healthbar
-        if (Input.GetKeyDown(KeyCode.E))
+        if (tookDmg)
         {
-            TakeDamage(20);
+            TakeDamage(10);
+            tookDmg = false;
         }
 
         if(currentHealth < 1)
         {
             animator.SetBool("IsDead", true);
-            //await Task.Delay(3000);
-           // GetComponent<CharacterController2D>().enabled = false;
+            GetComponent<CharacterController2D>().able = false;
+            await Task.Delay(2000);
+            animator.enabled = false;
             //GetComponent<PlayerCombat>().enabled = false;
-            
+
         }
     }
 
@@ -65,7 +65,7 @@ public class PlayerCombat : MonoBehaviour
         {
             foreach (GameObject t in GlobalConstables.GetGlobalConstables().GetEnemies())
             {
-                if (Vector2.Distance(t.transform.position, transform.position) < 1)
+                if (Vector2.Distance(t.transform.position, transform.position) < 2)
                 {
                     t.GetComponent<Mobs>().tookHit = true;
                 }

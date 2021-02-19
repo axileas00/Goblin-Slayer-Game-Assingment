@@ -3052,7 +3052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878204541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 98, y: 1.5, z: 0}
+  m_LocalPosition: {x: 98, y: 1.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1730601755}
@@ -3071,9 +3071,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextRoom:
-  - {fileID: 306013836138144569, guid: faaddfc5043377c4dab38053d8a62a54, type: 3}
+  - {fileID: 6992441236912079221, guid: a9910e34817e1dd4abf5c5152591e382, type: 3}
   - {fileID: 6992441236912079221, guid: 31c151f4ec15bb84291fd388a0201d0e, type: 3}
-  - {fileID: 6240325307801979981, guid: 1dcdde0cbcd16854b95cad5e94a8ff24, type: 3}
+  - {fileID: 6992441236912079221, guid: be2d51b8c7e06374196a7973395d683c, type: 3}
 --- !u!1 &1958028757
 GameObject:
   m_ObjectHideFlags: 0
@@ -3122,7 +3122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -3257,6 +3257,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2165686143574674770, guid: 2843f6e5515ea1b4797ca9a5d8ef675c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2165686143574674771, guid: 2843f6e5515ea1b4797ca9a5d8ef675c,
         type: 3}
       propertyPath: healthBar

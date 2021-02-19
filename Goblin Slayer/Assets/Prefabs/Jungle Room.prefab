@@ -29,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185530463431823086}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.254, y: 0.681, z: 0}
-  m_LocalScale: {x: 168.63715, y: 24.76012, z: 1}
+  m_LocalPosition: {x: -2.007, y: 0.681, z: 0}
+  m_LocalScale: {x: 169.36404, y: 24.76012, z: 1}
   m_Children: []
   m_Father: {fileID: 6992441236912079220}
   m_RootOrder: 0
@@ -120,7 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029a3b01599323d4fbbb84f52be31518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6354530637781229582, guid: 3b2be8361c121494bbdd518d0a9fcd04, type: 3}
+  enemy:
+  - {fileID: 5152105860176054971, guid: 26c77b719c570ad48b98e61e27635360, type: 3}
+  - {fileID: 1034620433633435044, guid: 0f2259800c36c034d88328bd1a06437b, type: 3}
+  - {fileID: 5152105860176054971, guid: 26c77b719c570ad48b98e61e27635360, type: 3}
   SpawnPoints:
   - {fileID: 9210422125939539392}
   - {fileID: 1406958854947164690}
@@ -38599,7 +38602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6992441236463179116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -86.52, y: 1.8099995, z: 0}
+  m_LocalPosition: {x: -86.763, y: 1.8, z: 0}
   m_LocalScale: {x: 4.38864, y: 3.2393327, z: 2.7429}
   m_Children: []
   m_Father: {fileID: 6992441236912079220}
@@ -38727,7 +38730,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6992441236530313845}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 81.94, y: 1.8199997, z: 0}
+  m_LocalPosition: {x: 82.29, y: 1.8, z: 0}
   m_LocalScale: {x: 4.38864, y: 3.2393327, z: 2.7429}
   m_Children: []
   m_Father: {fileID: 6992441236912079220}
@@ -39012,9 +39015,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextRoom:
-  - {fileID: 306013836138144569, guid: faaddfc5043377c4dab38053d8a62a54, type: 3}
+  - {fileID: 6992441236912079221, guid: a9910e34817e1dd4abf5c5152591e382, type: 3}
   - {fileID: 6992441236912079221}
-  - {fileID: 6240325307801979981, guid: 1dcdde0cbcd16854b95cad5e94a8ff24, type: 3}
+  - {fileID: 6992441236912079221, guid: be2d51b8c7e06374196a7973395d683c, type: 3}
 --- !u!1 &9210422125939539392
 GameObject:
   m_ObjectHideFlags: 0
