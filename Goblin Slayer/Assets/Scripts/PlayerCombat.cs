@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.UI;
+
 public class PlayerCombat : MonoBehaviour
 {
     public int maxHealth = 100;
@@ -15,17 +17,24 @@ public class PlayerCombat : MonoBehaviour
     public HealthBar healthBar;
     public CharacterController2D playerMovementRef;
     public LayerMask EnemyLayers;
+    bool x = true;
+    [SerializeField]GameObject endGamePanel;
+    [SerializeField]Text text;
+    int c;
+    string[] messagges = new string[] { "YOU LOSE!", "Maybe next time.", "Thats rough buddy...", "What are you gonna do?", "WASTED" };
     void Start()
     {
+        
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        c = Random.Range(0, messagges.Length);
     }
     async void Update()
     {
         //Player attackRate restriction
         if(Time.time >= nextAttackTime)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && x)
             {
                 Attack();
                 
@@ -50,16 +59,22 @@ public class PlayerCombat : MonoBehaviour
 
         if(currentHealth < 1)
         {
-            animator.SetBool("IsDead", true);
+            x = false;
             GetComponent<CharacterController2D>().able = false;
+            animator.SetBool("IsDead", true);
             await Task.Delay(2000);
+            endGamePanel.SetActive(true);
             animator.enabled = false;
-            //GetComponent<PlayerCombat>().enabled = false;
-
+            text.text = messagges[c];
+            GlobalConstables.GetGlobalConstables().SetSpawnedRoomsTo(0);
+            GlobalConstables.GetGlobalConstables().SetTotalEnemiesTo(0);
+            GlobalConstables.GetGlobalConstables().GetEnemies().Clear();
+            
+            Time.timeScale = 0;
         }
     }
 
-    void DoDmg()
+    void DoDmg()//on animation event
     {
         if(GlobalConstables.GetGlobalConstables().GetEnemies().Count > 0)
         {
