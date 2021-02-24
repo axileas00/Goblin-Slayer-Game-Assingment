@@ -18,13 +18,13 @@ public class PlayerCombat : MonoBehaviour
     public CharacterController2D playerMovementRef;
     public LayerMask EnemyLayers;
     bool x = true;
+    public int dmg = 10;
     [SerializeField]GameObject endGamePanel;
     [SerializeField]Text text;
     int c;
     string[] messagges = new string[] { "YOU LOSE!", "Maybe next time.", "Thats rough buddy...", "What are you gonna do?", "WASTED" };
     void Start()
     {
-        
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         c = Random.Range(0, messagges.Length);
@@ -53,7 +53,7 @@ public class PlayerCombat : MonoBehaviour
         //inflict damage on the healthbar
         if (tookDmg)
         {
-            TakeDamage(10);
+            TakeDamage(dmg);
             tookDmg = false;
         }
 
@@ -69,7 +69,7 @@ public class PlayerCombat : MonoBehaviour
             GlobalConstables.GetGlobalConstables().SetSpawnedRoomsTo(0);
             GlobalConstables.GetGlobalConstables().SetTotalEnemiesTo(0);
             GlobalConstables.GetGlobalConstables().GetEnemies().Clear();
-            
+            GlobalConstables.GetGlobalConstables().GetRooms().Clear();
             Time.timeScale = 0;
         }
     }
@@ -117,12 +117,4 @@ public class PlayerCombat : MonoBehaviour
             //enemy.GetComponent<>
         }
     }//enables animator
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
-            return;
-
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
 }

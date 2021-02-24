@@ -5,21 +5,11 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public CameraFollows cameraFollow;
     public Transform playerTransform;
     
-    
-
     void Start()
     {
         cameraFollow.Setup(() => playerTransform.position);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    }//sets camera to fallow the given transform
 }

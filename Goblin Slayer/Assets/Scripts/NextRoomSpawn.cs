@@ -21,7 +21,8 @@ public class NextRoomSpawn : MonoBehaviour
         int roomNmb = Random.Range(0, nextRoom.Length);
         Instantiate(nextRoom[roomNmb], transform.position, Quaternion.identity);
         GlobalConstables.GetGlobalConstables().IncreaseSpawnedRoomsBy(1);
-        gameObject.SetActive(false);
+        Destroy(this.gameObject);
+        //gameObject.SetActive(false);
         //transform.position = new Vector3(transform.position.x + 170, 0, 0);
     }//A method that spawns new rooms
 }

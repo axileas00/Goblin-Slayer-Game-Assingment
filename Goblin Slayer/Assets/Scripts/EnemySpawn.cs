@@ -14,8 +14,9 @@ public class EnemySpawn : MonoBehaviour
     private GameObject enemyToAdd;
 
     public bool enable = false;
-
-    private int x;
+    int x;
+    public int hpSet = 40;
+    public int dmgTaken = 0;
     
     private async void Update()
     {
@@ -29,6 +30,8 @@ public class EnemySpawn : MonoBehaviour
             {
                 x = Random.Range(0, SpawnPoints.Length);
                 enemyToAdd = Instantiate(enemy[x], SpawnPoints[x].transform.position, Quaternion.identity);
+                enemyToAdd.GetComponent<Mobs>().SetHpTo(hpSet);
+                enemyToAdd.GetComponent<Mobs>().SetDmgTo(dmgTaken);
                 GlobalConstables.GetGlobalConstables().GetEnemies().Add(enemyToAdd);
                 await Task.Delay(1000);
             }// spawn mechanism

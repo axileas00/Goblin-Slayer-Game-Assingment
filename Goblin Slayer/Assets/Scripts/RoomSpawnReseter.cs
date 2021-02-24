@@ -32,7 +32,16 @@ public class RoomSpawnReseter : MonoBehaviour
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("Spawned", true);
                 }// resets the animation booleans
             }
-            
+
+            if (GlobalConstables.GetGlobalConstables().GetHighscore() % 3 == 0)
+            {
+                Debug.Log(GlobalConstables.GetGlobalConstables().GetHighscore() % 3);
+                GetComponent<PlayerCombat>().dmg += 5;
+                collision.GetComponent<EnemySpawn>().hpSet += 10;
+                collision.GetComponent<EnemySpawn>().dmgTaken += 5;
+            }
+
+
             if (spawner != null && spawner.transform.parent.gameObject == parent)
             {
                 GlobalConstables.GetGlobalConstables().SetSpawnedRoomsTo(0);
@@ -48,12 +57,17 @@ public class RoomSpawnReseter : MonoBehaviour
 
             parent = collision.gameObject.transform.parent.gameObject;//set parent
 
-            for (int i = 0; i < parent.transform.childCount - 1; i++)
+            for (int i = 0; i < parent.transform.childCount; i++)
             {
                 if (parent.transform.GetChild(i).name.Equals("BackDoor") && GlobalConstables.GetGlobalConstables().GetEnemies().Count == 0 && GlobalConstables.GetGlobalConstables().GetTotalEnemies() <= 0)
                 {
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("SpawnedAndDestroyied", true);
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("Spawned", false);
+                }
+                else if (parent.transform.GetChild(i).name.Equals("HpPotion") && GlobalConstables.GetGlobalConstables().GetEnemies().Count == 0 && GlobalConstables.GetGlobalConstables().GetTotalEnemies() <= 0)
+                {
+                    parent.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
+                    parent.transform.GetChild(i).GetComponent<BoxCollider2D>().enabled = true;
                 }
             }//sets the animation booleans
         }
@@ -76,7 +90,7 @@ public class RoomSpawnReseter : MonoBehaviour
                 }
             }//destroy rooms
 
-            for (int i = 0; i < parent.transform.childCount - 1; i++)
+            for (int i = 0; i < parent.transform.childCount; i++)
             {
                 if (parent.transform.GetChild(i).name.Equals("FrontDoor")) 
                 {
