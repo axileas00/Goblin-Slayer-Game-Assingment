@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class BeginGame : MonoBehaviour
 {
+    [SerializeField] GameObject panel;
+    [SerializeField] GameObject pausePanel;
     private void Start()
     {
         Time.timeScale = 1;
@@ -24,5 +26,19 @@ public class BeginGame : MonoBehaviour
         Application.Quit();
     }
 
-   
+    public void OnClickOptionsButton()
+    {
+        panel.SetActive(true);
+    }
+
+    public void OnClickBackButton()
+    {
+        panel.SetActive(false);
+    }
+    public void OnClickResumeButton()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
 }

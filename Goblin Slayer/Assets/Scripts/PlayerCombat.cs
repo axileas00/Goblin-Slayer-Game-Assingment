@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerCombat : MonoBehaviour
     bool x = true;
     public int dmg = 10;
     [SerializeField]GameObject endGamePanel;
+    [SerializeField]GameObject pauseGamePanel;
     [SerializeField]Text text;
     int c;
     string[] messagges = new string[] { "YOU LOSE!", "Maybe next time.", "Thats rough buddy...", "What are you gonna do?", "WASTED" };
@@ -71,6 +73,17 @@ public class PlayerCombat : MonoBehaviour
             GlobalConstables.GetGlobalConstables().GetEnemies().Clear();
             GlobalConstables.GetGlobalConstables().GetRooms().Clear();
             Time.timeScale = 0;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+            pauseGamePanel.SetActive(true);
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            pauseGamePanel.SetActive(false);
         }
     }
 

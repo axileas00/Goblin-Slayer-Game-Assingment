@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomSpawnReseter : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class RoomSpawnReseter : MonoBehaviour
                     spawner = parent.transform.GetChild(i).gameObject;
                     Debug.Log("spawner " + spawner);
                 }// Checks if the current room has a NextRoomSpawner gameobject
-                else if(parent.transform.GetChild(i).name.Equals("BackDoor") || parent.transform.GetChild(i).name.Equals("FrontDoor"))
+                else if (parent.transform.GetChild(i).name.Equals("BackDoor") || parent.transform.GetChild(i).name.Equals("FrontDoor"))
                 {
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("SpawnedAndDestroyied", false);
                     parent.transform.GetChild(i).GetComponent<Animator>().SetBool("Spawned", true);

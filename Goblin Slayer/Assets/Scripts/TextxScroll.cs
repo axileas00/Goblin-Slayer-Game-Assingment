@@ -29,7 +29,7 @@ public class TextxScroll : MonoBehaviour
         //pos += localVectorBack * spd * Time.deltaTime;
         transform.position = pos;
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Space))
         {
             Go();
         }
